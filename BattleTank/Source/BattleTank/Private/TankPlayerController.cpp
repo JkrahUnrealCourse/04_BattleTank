@@ -13,14 +13,14 @@ ATank * ATankPlayerController::GetControllerTank() const
 void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
-	UE_LOG(LogTemp, Warning, TEXT("PlayerConroller Begin Play"));
+	UE_LOG(LogTemp, Warning, TEXT("TankPlayerController: Begin Play"));
 
 	ATank *ControllerTank =  GetControllerTank();
 	if (ControllerTank) {
-		UE_LOG(LogTemp, Warning, TEXT(".. controlling tank [%s]"), *ControllerTank->GetName() );
+		UE_LOG(LogTemp, Warning, TEXT("TankPlayerController: controlling tank [%s]"), *ControllerTank->GetName() );
 	}
 	else {
-		UE_LOG(LogTemp, Error, TEXT(".. Could NOT get tank "));
+		UE_LOG(LogTemp, Error, TEXT("TankPlayerController: Could NOT get tank "));
 	}
 
 }
