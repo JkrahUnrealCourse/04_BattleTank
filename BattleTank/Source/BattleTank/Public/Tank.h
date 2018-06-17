@@ -15,8 +15,10 @@ class BATTLETANK_API ATank : public APawn
 	GENERATED_BODY()
 
 public:
-	void AimAt(FVector HitLocation);
+	// TODO tweak LaunchSpeed
+	UPROPERTY(EditAnywhere, Category = Firing) float LaunchSpeed = 100000.0f;
 	UFUNCTION(BlueprintCallable, Category = Setup) void SetBarrelReference(UStaticMeshComponent *BarrelToSet);
+	void AimAt(FVector HitLocation);
 
 protected:
 	UTankAimingComponent *TankAimingComponent = nullptr;
