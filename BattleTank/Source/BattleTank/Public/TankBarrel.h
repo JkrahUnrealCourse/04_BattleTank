@@ -19,11 +19,13 @@ UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent), hidecategori
 	
 public:
 	void Elevate(float RelativeSpeed);
+	void Rotate(float RelativeSpeed);
+
 private:
-	UPROPERTY(EditAnywhere, Category = Setup) float MaxDegreesPerSecond = 20;
+	UPROPERTY(EditAnywhere, Category = Setup) float MaxElevationDegreesPerSecond = 5;
 	UPROPERTY(EditAnywhere, Category = Setup) float MinElevationDegrees = 0;
 	UPROPERTY(EditAnywhere, Category = Setup) float MaxElevationDegrees = 40;
 	
-
+	
 
 };

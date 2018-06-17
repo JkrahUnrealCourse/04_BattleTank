@@ -2,8 +2,9 @@
 
 #include "TankAIController.h"
 #include "Classes/Engine/World.h"
+#include "Tank.h"
 
-
+//-------------------
 void ATankAIController::BeginPlay()
 {
 	Super::BeginPlay();
@@ -18,12 +19,9 @@ void ATankAIController::BeginPlay()
 		UE_LOG(LogTemp, Warning, TEXT("TankAIController: player tank [%s]"), *PlayerTank->GetName());
 	}
 	else { UE_LOG(LogTemp, Error, TEXT("TankAIController:  Could NOT get player tank ")); }
-
-
-
 }
 
-
+//-------------------
 void ATankAIController::Tick(float DeltaTime) {
 	Super::Tick(DeltaTime);
 	if ((ControllerTank) && (PlayerTank)) {
@@ -31,8 +29,8 @@ void ATankAIController::Tick(float DeltaTime) {
 
 		// Aim Towards Player
 		AimAtPlayer();
-
-		// Fire at Player
+		
+		// TODO Fire at Player
 
 	}
 
@@ -40,24 +38,13 @@ void ATankAIController::Tick(float DeltaTime) {
 	
 }
 
-
-ATank * ATankAIController::GetControllerTank() const
-{
-	return Cast<ATank>(GetPawn());
-}
-
-
-ATank * ATankAIController::GetPlayerTank() const
-{
-	return Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
-}
+//-------------------
+ATank *ATankAIController::GetControllerTank() const{	return Cast<ATank>(GetPawn());	}
+ATank * ATankAIController::GetPlayerTank() const{	return Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());	}
 
 //-------------------
 void ATankAIController::AimAtPlayer() {
 	if ((ControllerTank) && (PlayerTank)) {
 		ControllerTank->AimAt(PlayerTank->GetActorLocation());		
-	}
-
-
-	
+	}		
 }

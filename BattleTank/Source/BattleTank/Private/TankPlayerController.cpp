@@ -2,6 +2,7 @@
 
 #include "TankPlayerController.h"
 #include "CollisionQueryParams.h"
+#include "Tank.h"
 ///------------------
 void ATankPlayerController::BeginPlay()
 {

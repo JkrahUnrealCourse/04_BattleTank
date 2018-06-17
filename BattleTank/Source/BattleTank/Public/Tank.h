@@ -5,10 +5,12 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
 //#include "GameFramework/Actor.h"
-#include "TankAimingComponent.h"
-
+//#include "TankAimingComponent.h"
 #include "Tank.generated.h" // must be last include
-class UTankBarrel; // Forward Declaration (ie we ar enot calling methods ?)
+
+// Forward Declaration (ie we ar enot calling methods ?)
+class UTankBarrel; 
+class UTankAimingComponent;
 
 UCLASS()
 class BATTLETANK_API ATank : public APawn
@@ -17,7 +19,7 @@ class BATTLETANK_API ATank : public APawn
 
 public:
 	// TODO tweak LaunchSpeed
-	UPROPERTY(EditAnywhere, Category = Firing) float LaunchSpeed = 100000.0f;
+	UPROPERTY(EditAnywhere, Category = Firing) float LaunchSpeed = 1000000.0f;
 	UFUNCTION(BlueprintCallable, Category = Setup) void SetBarrelReference(UTankBarrel *BarrelToSet);
 	void AimAt(FVector HitLocation);
 

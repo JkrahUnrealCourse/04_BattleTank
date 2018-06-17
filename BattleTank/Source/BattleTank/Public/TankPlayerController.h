@@ -2,23 +2,25 @@
 
 #pragma once
 
-#include "Tank.h"
+//#include "Tank.h"
+
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
 #include "TankPlayerController.generated.h" // must be last include
 
+class ATank;
+
 /**
  * 
  */
-UCLASS()
-class BATTLETANK_API ATankPlayerController : public APlayerController
+UCLASS() class BATTLETANK_API ATankPlayerController : public APlayerController
 {
 	GENERATED_BODY()
 public:
 	
 	UPROPERTY(EditAnywhere) float CrossHairXLocation = 0.5;
 	UPROPERTY(EditAnywhere) float CrossHairYLocation = 0.33333f;
-	UPROPERTY(EditAnywhere) float LineTraceRange = 100000.0f;
+	UPROPERTY(EditAnywhere) float LineTraceRange = 200000.0f;
 
 
 

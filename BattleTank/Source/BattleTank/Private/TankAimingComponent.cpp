@@ -5,6 +5,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "TankBarrel.h"
 
+
 // Sets default values for this component's properties
 UTankAimingComponent::UTankAimingComponent()
 {
@@ -46,10 +47,12 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed) {
 			Barrel->GetSocketLocation(FName("Projectile")),
 			HitLocation,
 			LaunchSpeed,
+			false, 
+			0, 
+			0,
 			ESuggestProjVelocityTraceOption::DoNotTrace);
 			if (bHaveAimSolution) {
-				// getsafe normal = 1 unit vector
-				FVector AimDirection = OutLaunchVelocity.GetSafeNormal();
+				FVector AimDirection = OutLaunchVelocity.GetSafeNormal();	// getsafe normal = 1 unit vector
 				//UE_LOG(LogTemp, Warning, TEXT("UTankAimingComponent: %s AimDirection: %s"), *(GetOwner()->GetName()), *AimDirection.ToString());
 
 				MoveBarrelTowards(AimDirection);
@@ -73,10 +76,14 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection) {
 	// Move Barrel
 	// get rotation from AimDirection
 	// move barrel to new rotation
-	auto BarrelRotator = Barrel->GetForwardVector().Rotation();
-	auto AimAsRotator = AimDirection.Rotation();
-	auto DeltaRotator = AimAsRotator - BarrelRotator;
+	FRotator BarrelRotator = Barrel->GetForwardVector().Rotation();
+	FRotator AimAsRotator = AimDirection.Rotation();
+	FRotator DeltaRotator = AimAsRotator - BarrelRotator;
 	
 	//UE_LOG(LogTemp, Warning, TEXT("UTankAimingComponent: %s MoveBarrelTowards BarrelRotator: %s AimAsRotator: %s"), *(GetOwner()->GetName()), *BarrelRotator.ToString(), *AimAsRotator.ToString());
-	Barrel->Elevate(5); // TODO remove magic number
+	Barrel->Elevate(DeltaRotator.Pitch); // TODO remove magic number
+	
+
+
+
 }
