@@ -55,7 +55,9 @@ ATank * ATankAIController::GetPlayerTank() const
 //-------------------
 void ATankAIController::AimAtPlayer() {
 	if ((ControllerTank) && (PlayerTank)) {
-		ControllerTank->AimAt(PlayerTank->GetActorLocation());
+		ControllerTank->AimAt(PlayerTank->GetActorLocation());		
 	}
+
+
 	
 }
