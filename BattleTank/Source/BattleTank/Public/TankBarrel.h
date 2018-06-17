@@ -18,7 +18,7 @@ UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent), hidecategori
 	GENERATED_BODY()
 	
 public:
-	void Elevate(float DegreesPerSecond);
+	void Elevate(float RelativeSpeed);
 private:
 	UPROPERTY(EditAnywhere, Category = Setup) float MaxDegreesPerSecond = 20;
 	UPROPERTY(EditAnywhere, Category = Setup) float MinElevationDegrees = 0;

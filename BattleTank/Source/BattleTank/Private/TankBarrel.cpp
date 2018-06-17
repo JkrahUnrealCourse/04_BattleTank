@@ -2,9 +2,11 @@
 
 #include "TankBarrel.h"
 
-void UTankBarrel::Elevate(float DegreesPerSecond) {
+void UTankBarrel::Elevate(float RelativeSpeed) {
+	// RelativeSpeed -1 max down, +1 max up
 
-	UE_LOG(LogTemp, Warning, TEXT("UTankBarrel.Elevate: %s DegreesPerSecond: %f"), *(GetOwner()->GetName()), DegreesPerSecond);
+	//float time = GetWorld()->GetTimeSeconds();
+	//UE_LOG(LogTemp, Warning, TEXT("UTankBarrel.Elevate[%f]: %s DegreesPerSecond: %f"), time, *(GetOwner()->GetName()), RelativeSpeed);
 }
 
 

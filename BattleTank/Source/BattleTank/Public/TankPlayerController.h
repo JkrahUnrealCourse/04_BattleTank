@@ -29,7 +29,7 @@ private:
 	FVector LookDirection;
 
 	virtual void BeginPlay() override;
-	virtual void Tick(float DeltaTime) override;
+	virtual void Tick(float DeltaTime) override;	// TODO do we need to tick
 
 	void AimTowardsCrosshair();
 	bool GetSightRayHitLocation(FVector &HitLocation) ;
