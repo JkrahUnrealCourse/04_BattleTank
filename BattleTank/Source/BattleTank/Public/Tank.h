@@ -8,6 +8,7 @@
 #include "TankAimingComponent.h"
 
 #include "Tank.generated.h" // must be last include
+class UTankBarrel; // Forward Declaration (ie we ar enot calling methods ?)
 
 UCLASS()
 class BATTLETANK_API ATank : public APawn
@@ -17,7 +18,7 @@ class BATTLETANK_API ATank : public APawn
 public:
 	// TODO tweak LaunchSpeed
 	UPROPERTY(EditAnywhere, Category = Firing) float LaunchSpeed = 100000.0f;
-	UFUNCTION(BlueprintCallable, Category = Setup) void SetBarrelReference(UStaticMeshComponent *BarrelToSet);
+	UFUNCTION(BlueprintCallable, Category = Setup) void SetBarrelReference(UTankBarrel *BarrelToSet);
 	void AimAt(FVector HitLocation);
 
 protected:

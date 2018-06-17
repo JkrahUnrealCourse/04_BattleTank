@@ -3,6 +3,7 @@
 
 #include "Components/StaticMeshComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "TankBarrel.h"
 
 // Sets default values for this component's properties
 UTankAimingComponent::UTankAimingComponent()
@@ -14,7 +15,7 @@ UTankAimingComponent::UTankAimingComponent()
 	// ...
 }
 
-void UTankAimingComponent::SetBarrelReference(UStaticMeshComponent *BarrelToSel) {	Barrel = BarrelToSel;	}
+void UTankAimingComponent::SetBarrelReference(UTankBarrel *BarrelToSel) {	Barrel = BarrelToSel;	}
 
 
 // Called when the game starts
@@ -36,31 +37,39 @@ void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, F
 }
 
 void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed) {
-	//UE_LOG(LogTemp, Warning, TEXT("UTankAimingComponent: %s AimLocation: %s"), *GetName(), *HitLocation.ToString());
+	
 	if (Barrel) {
-		//FVector BarrelLocation = Barrel->GetComponentLocation();
-		//UE_LOG(LogTemp, Warning, TEXT("UTankAimingComponent: %s BarrelLocation: %s AimLocation: %s"), *(GetOwner()->GetName()), *BarrelLocation.ToString(), *HitLocation.ToString());
-		//UE_LOG(LogTemp, Warning, TEXT("UTankAimingComponent: %s LaunchSpeed: %f"), *(GetOwner()->GetName()), LaunchSpeed);
-
 		FVector OutLaunchVelocity;
-		FVector StartLocation = Barrel->GetSocketLocation(FName("Projectile"));
-		if (UGameplayStatics::SuggestProjectileVelocity(
+		bool bHaveAimSolution = UGameplayStatics::SuggestProjectileVelocity(
 			this,
 			OutLaunchVelocity,
 			Barrel->GetSocketLocation(FName("Projectile")),
 			HitLocation,
 			LaunchSpeed,
-			false,
-			0.f,	//float CollisionRadius,
-			0.f,	//float OverrideGravityZ,
-			ESuggestProjVelocityTraceOption::DoNotTrace)) {
-			// getsafe normal = 1 unit vector
-			FVector AimDirection = OutLaunchVelocity.GetSafeNormal();
-			UE_LOG(LogTemp, Warning, TEXT("UTankAimingComponent: %s AimDirection: %s"), *(GetOwner()->GetName()), *AimDirection.ToString());
+			ESuggestProjVelocityTraceOption::DoNotTrace);
+			if (bHaveAimSolution) {
+				// getsafe normal = 1 unit vector
+				FVector AimDirection = OutLaunchVelocity.GetSafeNormal();
+				//UE_LOG(LogTemp, Warning, TEXT("UTankAimingComponent: %s AimDirection: %s"), *(GetOwner()->GetName()), *AimDirection.ToString());
+
+				MoveBarrelTowards(AimDirection);
+
 
 		}
 
 
 
 	}
+}
+
+void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection) {
+	// Move Barrel
+	// get rotation from AimDirection
+	// move barrel to new rotation
+	auto BarrelRotator = Barrel->GetForwardVector().Rotation();
+	auto AimAsRotator = AimDirection.Rotation();
+	auto DeltaRotator = AimAsRotator - BarrelRotator;
+	
+	//UE_LOG(LogTemp, Warning, TEXT("UTankAimingComponent: %s MoveBarrelTowards BarrelRotator: %s AimAsRotator: %s"), *(GetOwner()->GetName()), *BarrelRotator.ToString(), *AimAsRotator.ToString());
+	Barrel->Elevate(5); // TODO remove magic number
 }
