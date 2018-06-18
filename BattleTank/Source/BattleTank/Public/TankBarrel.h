@@ -12,17 +12,17 @@
 //UCLASS()
 
 // Tank Barrel Params
-UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent), hidecategories= ("Collision"))
+UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 	class BATTLETANK_API UTankBarrel : public UStaticMeshComponent
 {
 	GENERATED_BODY()
 	
 public:
 	void Elevate(float RelativeSpeed);
-	void Rotate(float RelativeSpeed);
+	
 
 private:
-	UPROPERTY(EditAnywhere, Category = Setup) float MaxElevationDegreesPerSecond = 5;
+	UPROPERTY(EditAnywhere, Category = Setup) float MaxElevationDegreesPerSecond = 10;
 	UPROPERTY(EditAnywhere, Category = Setup) float MinElevationDegrees = 0;
 	UPROPERTY(EditAnywhere, Category = Setup) float MaxElevationDegrees = 40;
 	

@@ -10,6 +10,7 @@
 
 // Forward Declaration (ie we ar enot calling methods ?)
 class UTankBarrel; 
+class UTankTurret;
 class UTankAimingComponent;
 
 UCLASS()
@@ -19,8 +20,10 @@ class BATTLETANK_API ATank : public APawn
 
 public:
 	// TODO tweak LaunchSpeed
-	UPROPERTY(EditAnywhere, Category = Firing) float LaunchSpeed = 1000000.0f;
+	UPROPERTY(EditAnywhere, Category = Firing) float LaunchSpeed = 4000.f;
 	UFUNCTION(BlueprintCallable, Category = Setup) void SetBarrelReference(UTankBarrel *BarrelToSet);
+	UFUNCTION(BlueprintCallable, Category = Setup) void SetTurretReference(UTankTurret *TurretToSet);
+
 	void AimAt(FVector HitLocation);
 
 protected:
