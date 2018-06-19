@@ -10,15 +10,16 @@ void ATankAIController::BeginPlay()
 	Super::BeginPlay();
 	UE_LOG(LogTemp, Warning, TEXT("TankAIController: Begin Play"));
 
-	ControllerTank = GetControllerTank();
-	if (ControllerTank) {		UE_LOG(LogTemp, Warning, TEXT("TankAIController: controlling tank [%s]"), *ControllerTank->GetName());
-	}	else {		UE_LOG(LogTemp, Error, TEXT("TankAIController:  Could NOT get controlling tank "));	}
+	//ControllerTank = GetControllerTank();
+	ControllerTank = Cast<ATank>(GetPawn());
 
-	PlayerTank = GetPlayerTank();
-	if (PlayerTank) {
-		UE_LOG(LogTemp, Warning, TEXT("TankAIController: player tank [%s]"), *PlayerTank->GetName());
-	}
-	else { UE_LOG(LogTemp, Error, TEXT("TankAIController:  Could NOT get player tank ")); }
+	if (!ControllerTank)// {		UE_LOG(LogTemp, Warning, TEXT("TankAIController: controlling tank [%s]"), *ControllerTank->GetName());	}	else
+	{		UE_LOG(LogTemp, Error, TEXT("TankAIController:  Could NOT get controlling tank "));	}
+
+	//PlayerTank = GetPlayerTank();
+	PlayerTank = Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
+	if (!PlayerTank)// {	UE_LOG(LogTemp, Warning, TEXT("TankAIController: player tank [%s]"), *PlayerTank->GetName());	}	else 
+	{ UE_LOG(LogTemp, Error, TEXT("TankAIController:  Could NOT get player tank ")); }
 }
 
 //-------------------
@@ -29,8 +30,7 @@ void ATankAIController::Tick(float DeltaTime) {
 
 		// Aim Towards Player
 		AimAtPlayer();
-		
-		// TODO Fire at Player
+		ControllerTank->Fire();  // TODO flimit fire rate
 
 	}
 
@@ -39,8 +39,8 @@ void ATankAIController::Tick(float DeltaTime) {
 }
 
 //-------------------
-ATank *ATankAIController::GetControllerTank() const{	return Cast<ATank>(GetPawn());	}
-ATank * ATankAIController::GetPlayerTank() const{	return Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());	}
+//ATank *ATankAIController::GetControllerTank() const{	return Cast<ATank>(GetPawn());	}
+//ATank * ATankAIController::GetPlayerTank() const{	return Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());	}
 
 //-------------------
 void ATankAIController::AimAtPlayer() {
