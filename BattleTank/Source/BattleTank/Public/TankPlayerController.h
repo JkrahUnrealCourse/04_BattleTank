@@ -18,9 +18,9 @@ UCLASS() class BATTLETANK_API ATankPlayerController : public APlayerController
 	GENERATED_BODY()
 public:
 	
-	UPROPERTY(EditAnywhere) float CrossHairXLocation = 0.5;
-	UPROPERTY(EditAnywhere) float CrossHairYLocation = 0.33333f;
-	UPROPERTY(EditAnywhere) float LineTraceRange = 200000.0f;
+	UPROPERTY(EditDefaultsOnly) float CrossHairXLocation = 0.5;
+	UPROPERTY(EditDefaultsOnly) float CrossHairYLocation = 0.33333f;
+	UPROPERTY(EditDefaultsOnly) float LineTraceRange = 200000.0f;
 
 
 
