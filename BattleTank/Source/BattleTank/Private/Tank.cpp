@@ -4,9 +4,11 @@
 #include "TankBarrel.h"
 #include "Projectile.h"
 #include "TankAimingComponent.h"
+#include "TankMovementComponent.h"
 #include "Classes/Engine/World.h"
 #include "Components/StaticMeshComponent.h"
 #include "Engine/StaticMeshSocket.h"
+
 
 // Sets default values
 ATank::ATank()
@@ -16,7 +18,7 @@ ATank::ATank()
 
 	// Add TankAimingComponent
 	TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("AimingComponent"));
-
+	TankMovementComponent = CreateDefaultSubobject<UTankMovementComponent>(FName("MovementComponent"));
 
 }
 
